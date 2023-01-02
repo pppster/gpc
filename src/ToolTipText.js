@@ -76,7 +76,7 @@ function get_tooltip_text_PCF(){
                             <p>Norm</p>
                             <p>Values:
                                 <ul>
-                                    <li><b>Value 1:</b></li>
+                                    <li><b>Value:</b></li>
                                     <li><b>Value 2:</b></li>
                                 </ul>
                             </p>
