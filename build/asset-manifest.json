@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/gpc/static/css/main.a9c06643.css",
+    "main.js": "/gpc/static/js/main.121947ba.js",
+    "static/media/IEEM.jpg": "/gpc/static/media/IEEM.be751bf623aa8550e61c.jpg",
+    "index.html": "/gpc/index.html",
+    "main.a9c06643.css.map": "/gpc/static/css/main.a9c06643.css.map",
+    "main.121947ba.js.map": "/gpc/static/js/main.121947ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a9c06643.css",
+    "static/js/main.121947ba.js"
+  ]
+}
