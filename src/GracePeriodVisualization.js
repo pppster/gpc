@@ -41,15 +41,15 @@ class GracePeriodVisualization extends React.Component {
         let explain_text = "";
         let visual_text = "";
         if (this.state.Scope === 1){
-            prob_gp = calc_prob_value(this.state.GP, false);
-        } else {
             prob_gp = calc_prob_value(this.state.GP, true);
+        } else {
+            prob_gp = calc_prob_value(this.state.GP, false);
         }
         if (is_first_time){
 
             this.gps = get_gp_values_to_plot();
-            this.probs_scope_unchanged = calc_prob_value_list(this.gps, true);
-            this.probs_scope_changed = calc_prob_value_list(this.gps, false);
+            this.probs_scope_unchanged = calc_prob_value_list(this.gps, false);
+            this.probs_scope_changed = calc_prob_value_list(this.gps, true);
             content = [
                 { id: "Time GP  ", value: '-',helptext:get_tooltip_text("TGP")},
                 { id: "GP  ", value: '-',helptext:get_tooltip_text("GP")},
@@ -60,20 +60,21 @@ class GracePeriodVisualization extends React.Component {
             visual_text = get_explanation_text("visualization_results_not_pressed");
             my_data = [
                 {
+                    x: this.probs_scope_changed,
+                    y: this.gps,
+                    type: 'line',
+                    name: 'Scope changed',
+                    hovertemplate: this.gps,
+                },
+                {
                     x: this.probs_scope_unchanged,
                     y: this.gps,
                     type: 'line',
                     name: 'Scope unchanged',
                     hovertemplate: this.gps,
 
-                },
-                {
-                    x: this.probs_scope_changed,
-                    y: this.gps,
-                    type: 'line',
-                    name: 'Scope changed',
-                    hovertemplate: this.gps,
                 }
+                
             ];
         }else {
             content = [
@@ -89,19 +90,19 @@ class GracePeriodVisualization extends React.Component {
             
             my_data=[
                 {
+                    x: this.probs_scope_changed,
+                    y: this.gps,
+                    type: 'line',
+                    name: 'Scope changed',
+                    hovertemplate: this.gps
+                },
+                {
                     x: this.probs_scope_unchanged,
                     y: this.gps,
                     type: 'line',
                     name: 'Scope unchanged',
                     hovertemplate: this.gps,
 
-                },
-                {
-                    x: this.probs_scope_changed,
-                    y: this.gps,
-                    type: 'line',
-                    name: 'Scope changed',
-                    hovertemplate: this.gps
                 },
                 {
                     x: [prob_gp],
@@ -149,7 +150,7 @@ class GracePeriodVisualization extends React.Component {
                         },
                         xaxis: {
                             fixedrange: true,
-                            range: [0, 1],
+                            range: [-0.01, 1.01],
                             tickmode:Array,
                             tickvals:[]
                         },
@@ -157,7 +158,7 @@ class GracePeriodVisualization extends React.Component {
                         yaxis: {
                             title: "GP",
                             fixedrange: true,
-                            range: [1,2]
+                            range: [0.99,2.01]
                         },
                         // margin: {
                         //     l: 50,
