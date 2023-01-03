@@ -44,51 +44,68 @@ class GracePeriodCalculation extends React.Component{
             T_0Value: this.props.T0,
             R_period_value: 10,
             App_renewal_value: 10,
+            change: false,
         }
+    }
+    componentDidUpdate(prevProps) {
     }
 
 
     handleRVChange(value) {
         this.setState({RVValue: value});
+        this.setState({change: true});
     }
     handleScopeChange(value) {
         this.setState({Scope: value});
+        this.setState({change: true});
     }
     handleEMChange(value) {
         this.setState({EMValue: value});
+        this.setState({change: true});
     }
     handleRLChange(value) {
         this.setState({RLValue: value});
+        this.setState({change: true});
     }
     handleRCChange(value) {
         this.setState({RCValue: value});
+        this.setState({change: true});
     }
     handleEDChange(value) {
         this.setState({EDValue: value});
+        this.setState({change: true});
     }
     handleISCChange(value) {
         this.setState({ISCValue: value});
+        this.setState({change: true});
     }
     handleSCSChange(value) {
         this.setState({SCSValue: value});
+        this.setState({change: true});
     }
     handleRChange(value) {
         this.setState({RValue: value});
+        this.setState({change: true});
     }
     handleAPPChange(value) {
         this.setState({APPValue: value});
+        this.setState({change: true});
     }
     handleCAChange(value) {
         this.setState({CAValue: value});
+        this.setState({change: true});
     }
     handleT0Change(value) {
         this.setState({T_0Value: value});
+        this.setState({change: true});
     }
     handleRPeriodValue(value) {
         this.setState({R_period_value: value});
+        this.setState({change: true});
     }
     handleAPPRenewalValue(value) {
         this.setState({App_renewal_value: value});
+        this.setState({change: true});
     }
 
     handleButtonClick(){
@@ -103,6 +120,7 @@ class GracePeriodCalculation extends React.Component{
         this.setState({PCFValue: loc_pcf});
         this.setState({GPValue: loc_gp});
         this.setState({T_GPValue: loc_tgp});
+        this.setState({change: false})
         this.props.onTCFChange(loc_tcf);
         this.props.onPCFChange(loc_pcf);
         this.props.onGPChange(loc_gp);
@@ -203,8 +221,10 @@ class GracePeriodCalculation extends React.Component{
                     visible={false}
                     />
 
-
-            <button type="button" onClick={this.handleButtonClick}>Calculate</button>
+            <p>
+                <button type="button" onClick={this.handleButtonClick}>Calculate</button>
+                {this.state.change && <text className="ChangeText">You have made some changes. Please press the calculate button again.</text>}
+            </p>
             </fieldset>
             </>
 

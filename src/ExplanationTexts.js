@@ -38,7 +38,7 @@ function get_vizualization_results_not_pressed(){
 }
 function get_vizualization_results_pressed(){
     let tooltip_string =   <div>
-    The diagram shows...
+    The calculated Grace Period is visualized to roughly estimate the urgency to fix the vulnerability.
     </div>
     ;
     return tooltip_string; 

@@ -31,39 +31,47 @@ class GracePeriodVisualization extends React.Component {
             this.setState({ Scope: this.props.Scope})
         }
     }
+    
 
 
     render() {
         let is_first_time = typeof this.gps === 'undefined';
-        let my_data = 0;
+        let plot_data = [];
         let prob_gp = 0;
         let content = 0;
         let explain_text = "";
         let visual_text = "";
+        
+        console.log(plot_data);
         if (this.state.Scope === 1){
             prob_gp = calc_prob_value(this.state.GP, true);
         } else {
             prob_gp = calc_prob_value(this.state.GP, false);
         }
+        
         if (is_first_time){
 
             this.gps = get_gp_values_to_plot();
             this.probs_scope_unchanged = calc_prob_value_list(this.gps, false);
             this.probs_scope_changed = calc_prob_value_list(this.gps, true);
             content = [
-                { id: "Time GP  ", value: '-',helptext:get_tooltip_text("TGP")},
-                { id: "GP  ", value: '-',helptext:get_tooltip_text("GP")},
-                { id: "PCF  ", value: '-',helptext:get_tooltip_text("PCF")},
-                { id: "TCF  ", value: '-',helptext:get_tooltip_text("TCF")},
+                { id: "Time GP  ", value: '-',helptext:get_tooltip_text("TGP"),unit:""},
+                { id: "Grace Period Factor GP  ", value: '-',helptext:get_tooltip_text("GP"),unit:""},
+                { id: "Process Criticality Factor PCF  ", value: '-',helptext:get_tooltip_text("PCF"),unit:""},
+                { id: "Time Criticality Factor TCF  ", value: '-',helptext:get_tooltip_text("TCF"),unit:""},
             ];
             explain_text = get_explanation_text("text_results_not_pressed");
             visual_text = get_explanation_text("visualization_results_not_pressed");
-            my_data = [
+            plot_data = [
                 {
                     x: this.probs_scope_changed,
                     y: this.gps,
                     type: 'line',
                     name: 'Scope changed',
+                    line: {
+                        color: 'rgba(200, 115, 115, 0.522)',
+                        width: 3
+                      },
                     hovertemplate: this.gps,
                 },
                 {
@@ -71,38 +79,48 @@ class GracePeriodVisualization extends React.Component {
                     y: this.gps,
                     type: 'line',
                     name: 'Scope unchanged',
+                    line: {
+                        color: 'rgb(141, 139, 139)',
+                        width: 3
+                      },
                     hovertemplate: this.gps,
-
-                }
+        
+                },
                 
             ];
+
         }else {
             content = [
-                
                 { id: "Time GP  ", value: (this.props.TimeGP),helptext:get_tooltip_text("TGP"),unit:" days"},
-                { id: "GP  ", value: (this.props.GP).toFixed(2),helptext:get_tooltip_text("GP"),unit:""},
-                { id: "PCF  ", value: (this.props.PCF).toFixed(2),helptext:get_tooltip_text("PCF"),unit:""},
-                { id: "TCF  ", value: (this.props.TCF).toFixed(2),helptext:get_tooltip_text("TCF"),unit:""},
-
+                { id: "Grace Period Factor GP  ", value: (this.props.GP).toFixed(2),helptext:get_tooltip_text("GP"),unit:""},
+                { id: "Process Criticality Factor PCF  ", value: (this.props.PCF).toFixed(2),helptext:get_tooltip_text("PCF"),unit:""},
+                { id: "Time Criticality Factor TCF  ", value: (this.props.TCF).toFixed(2),helptext:get_tooltip_text("TCF"),unit:""},
             ];
             explain_text = get_explanation_text("text_results_pressed");
             visual_text = get_explanation_text("visualization_results_pressed");
-            
-            my_data=[
+            plot_data = [
                 {
                     x: this.probs_scope_changed,
                     y: this.gps,
                     type: 'line',
                     name: 'Scope changed',
-                    hovertemplate: this.gps
+                    line: {
+                        color: 'rgba(200, 115, 115, 0.522)',
+                        width: 3
+                      },
+                    hovertemplate: this.gps,
                 },
                 {
                     x: this.probs_scope_unchanged,
                     y: this.gps,
                     type: 'line',
                     name: 'Scope unchanged',
+                    line: {
+                        color: 'rgb(141, 139, 139)',
+                        width: 3
+                      },
                     hovertemplate: this.gps,
-
+        
                 },
                 {
                     x: [prob_gp],
@@ -110,10 +128,16 @@ class GracePeriodVisualization extends React.Component {
                     mode: 'markers',
                     type: 'scatter',
                     name: 'Current GP',
-                    hovertemplate: this.state.GP
+                    hovertemplate: this.state.GP,
+                    marker : {
+                        color: 'black',
+                        symbol: 'diamond' },
                 }
-            ]
+                
+            ];
+
         }
+        
 
 
         return (
@@ -122,10 +146,11 @@ class GracePeriodVisualization extends React.Component {
                 <p>{explain_text}</p>
                 <table className="ResultTable">
                 <tbody>
-                    {content.map(({id, value,helptext}) => (
+                    {content.map(({id, value,helptext,unit}) => (
                     <tr key={id}>
                         <td>{id}<div className="tooltip"><img src={helpicon} alt="help" className="helpicon"/><span className="tooltiptext">{helptext}</span></div></td>
                         <td>{value}</td>
+                        <td>{unit}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -133,13 +158,16 @@ class GracePeriodVisualization extends React.Component {
                 <p>{visual_text}</p>
                 <Plot
                     className="plot"
-                    data={my_data}
+                    data={plot_data}
                     config={{
                         displayModeBar:false  
                       }}
                     layout={{
                         hovermode:'closest',
                         autosize: true, 
+                        margin:{
+                            t: 5,
+                        },
                         
                         legend: {
                             xanchor: "center",
@@ -156,7 +184,7 @@ class GracePeriodVisualization extends React.Component {
                         },
                         
                         yaxis: {
-                            title: "GP",
+                            title: "Grace Period Value GP",
                             fixedrange: true,
                             range: [0.99,2.01]
                         },

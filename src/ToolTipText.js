@@ -41,13 +41,8 @@ function get_tooltip_text(name){
 function get_tooltip_text_GP(){
     let tooltip_string =   <div>
                             <b>Grace Period Factor</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
-                            <p>Values:
-                                <ul>
-                                    <li><b>Value 1:</b></li>
-                                    <li><b>Value 2:</b></li>
-                                </ul>
+                            <p>The Grace Period Factor is calculated by the Metric. 
+                                It is a measured value for a reasonable remediation time of a given vulnerability.
                             </p>
                             </div>
                             ;
@@ -56,14 +51,18 @@ function get_tooltip_text_GP(){
 
 function get_tooltip_text_TCF(){
     let tooltip_string =   <div>
-                            <b>Time-Criticality-Factor</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
-                            <p>Values:
-                                <ul>
-                                    <li><b>Value 1:</b></li>
-                                    <li><b>Value 2:</b></li>
-                                </ul>
+                            <b>Time Criticality Factor</b>
+                            <p>
+
+                            The Time Criticality Factor depends on
+                            <ul>
+                            <li>Vulnerability Risk Value RV</li>
+                            <li>Exploit Code Maturity EM</li>
+                            <li>Remediation Level RL</li>
+                            <li>Report Confidence RC</li>
+                            <li>Exploit Code Dissemination ED</li>
+                            <li>Incident Scale ISC</li>
+                            </ul>
                             </p>
                             </div>
                             ;
@@ -71,14 +70,14 @@ function get_tooltip_text_TCF(){
 }
 function get_tooltip_text_PCF(){
     let tooltip_string =   <div>
-                            <b>Process-Criticality-Factor</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
-                            <p>Values:
-                                <ul>
-                                    <li><b>Value:</b></li>
-                                    <li><b>Value 2:</b></li>
-                                </ul>
+                            <b>Process Criticality Factor</b>
+                            <p>
+                            The Process Criticality Factor depends on
+                            <ul>
+                            <li>Supply Chain Scale SCS</li>
+                            <li>Remediation Dissemination R</li>  
+                            <li>Contractual Agreements CA</li>
+                            </ul>
                             </p>
                             </div>
                             ;
@@ -88,14 +87,7 @@ function get_tooltip_text_PCF(){
 function get_tooltip_text_TGP(){
     let tooltip_string =   <div>
                             <b>Grace Period</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
-                            <p>Values:
-                                <ul>
-                                    <li><b>Value 1: </b></li>
-                                    <li><b>Value 2: </b></li>
-                                </ul>
-                            </p>
+                            <p>This Calculation result is the suggested remediation time of a given vulnerability.</p>
                             </div>
                             ;
     return tooltip_string;
@@ -137,7 +129,13 @@ function get_tooltip_text_EM(){
 function get_tooltip_text_RL(){
     let tooltip_string =   <div>
                             <b>Remediation Level</b>
-                            <p>Beschreibung</p>
+                            <p>
+                            The Remediation Level assesses the reduction of the threat posed by the vulnerability to be assessed over time. The typical vulnerability in the automotive area is usually already patched when it becomes publicly known. Nevertheless, the remediation level influences the time criticality for measures like workarounds, hotfixes or final patches for the vulnerability to be assessed and for vulnerabilities related with it, since it reflects a decreasing urgency as remediation becomes final. 
+                            When a possible attack scenario is reported by a white hat, this report can contain several related vulnerabilities (attack vector). Since each vulnerability is assessed individually, these vulnerabilities can be assessed and thus prioritized differently. Mitigation or remediation can then simultaneously lead to mitigation or remediation of another related vulnerability. This metric captures such effects that lead to changes in exploitability over time.  It must therefore be applied to the entirety of all threat scenarios (or attack paths) that include the vulnerability being assessed. If multiple threat scenarios (with associated attack paths) can be derived from the vulnerability to be assessed, then the effect of a measure on only the threat scenario that has the highest 'Risk Value' is relevant. Therefore, if an existing measure has no effect the threat scenario that has the highest 'Risk Value', then this measure is considered as 'Unavailable'.
+
+
+
+                            </p>
                             <p>The Remediation Level of a vulnerability is adapted from the Common Vulnerability Scoring System v.3.1 (CVSS v3.1)</p>
                             <p>Values:
                                 <ul>
@@ -156,7 +154,16 @@ function get_tooltip_text_RL(){
 function get_tooltip_text_RC(){
     let tooltip_string =   <div>
                             <b>Report Confidence RC</b>
-                            <p>Beschreibung</p>
+                            <p>
+                            This metric measures the degree of confidence in the existence of the vulnerability and the credibility of the known technical details. Sometimes only the existence of vulnerabilities is published, but without specific details. For example, an impact may be identified as undesirable, but the root cause may not be known. The vulnerability may later be confirmed by research that suggests where the vulnerability may lie, although the research may not be certain. Finally, a vulnerability may be confirmed by confirmation from the author or vendor of the affected technology. Thus, the urgency of a vulnerability may vary over time as new discoveries lead to the assumption of a vulnerability's existence with altered certainty. This metric also indicates the level of technical knowledge and equipment available to potential attackers. Thus, overlaps may exist with the following criteria for determining the 'Risk Value' according to ISO/SAE 21434:
+                            <ul>
+                            <li>Expertise </li>
+                            <li> Equipment </li>
+                            </ul>
+                            The more a vulnerability is validated by reputable sources, the higher the score.
+
+
+                            </p>
                             <p>This metric is adapted from the Common Vulnerability Scoring System v.3.1 (CVSS v3.1)</p>
                             <p>Values:
                                 <ul>
@@ -174,8 +181,14 @@ function get_tooltip_text_RC(){
 function get_tooltip_text_ED(){
     let tooltip_string =   <div>
                             <b>Exploit Code Dissemination ED</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
+                            <p>
+                            This metric measures the availability of exploit code that exploits the vulnerability to be assessed. The maturity of the exploit does not need to be evaluated. Scoring is based on statistical significance from studies of historical data on vulnerabilities in the traditional IT environment [Allodi et al., 2014], and is driven by the following evidence-based assumptions:
+                            <ul>
+                            <li> Considering the existence of exploit code for a given vulnerability in publicly accessible databases as a risk factor for actual exploitation in the wild can increase prediction rate up to 45 % better than only considering the CVSS Score.</li>
+                            <li> Considering the existence of exploit code for a given vulnerability on black market as a risk factor for actual exploitation in the wild can increase prediction rate up to 80 % better than only considering the CVSS Score.</li>
+                            </ul>
+                            The lower the prediction rate given by a risk factor, the lower the statistical exploitation probability on average. Thus, the time criticality factor (TCF) decreases. If there are no findings or if the prediction rate is as high as possible (external - black market), this metric has no (weakening) effect on TCF.
+                            </p>
                             <p>Values:
                                 <ul>
                                     <li><b>External - not public: </b>Information was found by external actors and Exploit Code Maturity is known only to them. Neither vulnerability information, nor an exploit involving the vulnerability has been disclosed yet.</li>
@@ -192,8 +205,14 @@ function get_tooltip_text_ED(){
 function get_tooltip_text_ISC(){
     let tooltip_string =   <div>
                             <b>Incident Scale ISC</b>
-                            <p>Beschreibung</p>
-                            <p>Norm: ISO/SAE 21434</p>
+                            <p>
+                            The evaluation of the scalability of damage is not fundamentally considered in the 'Risk Value' according to ISO/SAE 21434. This metric therefore does not represent an overlap. If the scalability of damage has already been considered in the development phase for a specific company, this assessment should nevertheless be reviewed and, if necessary, adjusted, since the assessment can change over time (e.g., if the expected delivery rate of the impacted/vulnerable component deviates significantly from the actual delivery rate).
+                            The 'Incident Scale' does not necessarily reflect only the company-specific ('Environmental') view. The environment in which components could be exposed to a threat due to the given vulnerability must initially be defined. The environment under consideration is not necessarily only the environment of one or more companies, but potentially the entire world due to the highly instationary character and the connectivity of vehicles. 
+                            If a specification of the exact number of impacted/vulnerable components operated in the environment to be defined cannot be made with certainty, the maximum number to be assumed should be used. This can be the case, for example, if precise assembly documentation (e.g. via VIN) is available, but an exact assessment is not possible due to incomplete tracking of the software status of the impacted/vulnerable component. In this case, all components would have to be treated as if they had the impacted/vulnerable software version.
+                            It should be noted that this metric does not evaluate possible significant scaling effects resulting from the vulnerability potentially enabling, for example, physical or functional bypass of an attacker to adjacent components/items/domains/functions along an attack path. Such effects are accounted for using the 'scope' metric. For example, this may refer to a vulnerability within a TCU that is located right at the interface to the backend server and could potentially allow the attacker to scale the attack to the backend.
+
+
+                            </p>
                             <p>Values:
                                 <ul>
                                     <li><b>Low: </b>The total of all vehicles affected by the vulnerability represents up to 1% of the manufacturer's total registered fleet</li>
@@ -210,8 +229,17 @@ function get_tooltip_text_ISC(){
 function get_tooltip_text_SCS(){
     let tooltip_string =   <div>
                             <b>Supply Chain Scale SCS</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
+                            <p>
+                            Multi-stakeholder processes for disclosing and remediating a vulnerability exhibit rising complexity as the number of vendors involved increases. Software from one supplier can be unique in each system implementation of the different customers, even if it maps the same function. A vulnerability can potentially affect multiple vendors in different ways. The assessment of risk and thus vulnerability prioritization may vary from vendor to vendor. Increased intra- as well as inter-corporal communication needs, as well as increased potential for conflict, can delay the process. (It must be remembered that, in case of doubt, the process can only be as efficient as its weakest link). While the following factors have a significant impact on process duration, they are not considered for this metric because they are the responsibility of the manufacturer: 
+                            <ul>
+                            <li>Inadequate quality or quantity of human resources.</li>
+                            <li>Insufficient processes </li>
+                            </ul>
+                            This metric does not consider whether pre-existing measures exist between participating vendors as part of contractual agreements or requirements documentation in the event that vulnerabilities occur in the field (e.g., within an Incident Response Plan or based on CAL-dependent requirements). These factors can greatly facilitate and specify the estimation of process criticality (PCF), but are not always present. Therefore, they are recorded separately.
+                            The impact of the metric on process criticality (PCF) increases linearly with the number of stakeholders. The real given complexity is thus approximately modeled by assuming a only bilateral communication for both, intra- and inter-corporal interactions. Each intra- and inter-interaction is assumed to have the same mean duration.
+
+
+                            </p>
                             <p>Values:
                                 <ul>
                                     <li><b>Low: </b>The number of vendors involved in the disclosure process as well as patch development is 1</li>
@@ -227,8 +255,14 @@ function get_tooltip_text_SCS(){
 function get_tooltip_text_R(){
     let tooltip_string =   <div>
                             <b>Remediation Dissemination</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
+                            <p>
+                            This metric evaluates the appropriate grace period with respect to the impact of the responsible vendor's organizational-strategical patch or update management. Technical considerations that affect patch development or verification are specifically excluded from this metric. Such aspects, if they are part of agreements between manufacturers, can be included in the evaluation of the process criticality PCF with the Contractual Agreements (CA) metric. The assessment may change over time under certain circumstances. For example, if a temporary mitigation or hotfix is planned first and a more profound patch is planned for a later date. For clarity, the different definitions for a patch and an update are pointed out. An update is defined as a measure that is characterized by the intention to implement extended or optimized functionality. It is usually deployed on a cyclical basis. A patch, on the other hand, is defined as a measure characterized by being triggered by a specific incident. Deployment can be event-triggered or cyclic (synchronized with the update cycle), depending on given circumstances.
+                            Manufacturers usually pursue an efficient update management. Especially when no OTA functionality is available, the bundled release of patches (e.g., Microsoft's "Patchday") makes sense for many reasons. Key factors influencing patch and/or update management can be economic considerations, system availability and safety and liability risks (monetary or reputational). Keeping the system up-to-date with recently released patches results in higher operational costs, while patching the system infrequently for its vulnerabilities leads to higher damage costs associated with higher levels of exploitation. A basic distinction can be made between a time-driven approach and an event-driven approach.
+                            In addition to the time at which a manufacturer provides patches, patch implementation management of the vehicle owner also plays a key role. The behavior of the vehicle owner lies outside the manufacturer's responsibility and is therefore not part of its incident response management. The patch implementation management on the part of the vehicle owner therefore has no influence on the evaluation of the appropriate grace period.
+                            The evaluation is carried out either by a dimensionless score that is included in the PCF if no concrete time specification can be made, or by a concrete time specification in days. This then does not influence the PCF or GP', but is added to the calculated reasonable Grace Period. 
+
+
+                            </p>
                             <p>Values:
                                 <ul>
                                     <li><b>None: </b>For the existing vulnerability, no measures at all are developed</li>
@@ -247,7 +281,11 @@ function get_tooltip_text_R(){
 function get_tooltip_text_RV(){
     let tooltip_string =   <div>
                             <b>Vulnerability Risk Value</b>
-                            <p>Beschreibung</p>
+                            <p>
+                            This value is determined from the risk assessment defined in the company (e.g.: 'Risk Matrix'). It considers the 'impact' and 'feasibility' assessments in a certain weighting. If, in the context of a TARA, 'Risk Values' have already been defined in the product development phase for the 'Threat Scenario' that is now to be evaluated in real terms on the basis of the vulnerability, these values can be adopted here (the same applies to 'impact' or 'feasibility' evaluation). The relevant impact categories for this metric are Safety and Operational. 
+                            If multiple threat scenarios (with associated attack paths) can be derived from the vulnerability to be assessed, then the threat scenario that has the highest risk value for the safety impact category is relevant. If this value is assigned to multiple threat scenarios, then the threat scenario that also has the highest risk value for the Operational impact category is relevant.
+                            The 'Risk Value' reflects the company-specific ('environmental') consideration of the impact. The 'Risk Value' should therefore not be equated with the CVSS Severity Base Score that is usually found in CVE and/or NVD entries.
+                            </p>
                             <p>Norm: ISO/SAE 21434 [-]</p>
                             <p>Values:
                                 <ul>
@@ -297,14 +335,7 @@ function get_tooltip_text_CA(){
 function get_tooltip_text_T0(){
     let tooltip_string =   <div>
                             <b>Default Grace Period</b>
-                            <p>Beschreibung</p>
-                            <p>Norm</p>
-                            <p>Values:
-                                <ul>
-                                    <li><b>Value 1:</b></li>
-                                    <li><b>Value 2:</b></li>
-                                </ul>
-                            </p>
+                            <p>The Default Grace Period is the Time Span in Days that will be multiplicated with the Grace Period Factor. </p>
                             </div>
                             ;
     return tooltip_string;
