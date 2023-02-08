@@ -62,8 +62,8 @@ const R = {
 }
 const APP = {
   "None": 0,
-  "Extension = ": 1,
-  "Renewal = ": 1,
+  "Extension =": 1,
+  "Renewal =": 1,
 }
 const CA = {
   "None": 0,

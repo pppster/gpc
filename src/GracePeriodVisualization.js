@@ -41,8 +41,6 @@ class GracePeriodVisualization extends React.Component {
         let content = 0;
         let explain_text = "";
         let visual_text = "";
-        
-        console.log(plot_data);
         if (this.state.Scope === 1){
             prob_gp = calc_prob_value(this.state.GP, true);
         } else {
