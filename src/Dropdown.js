@@ -25,7 +25,7 @@ class Dropdown extends React.Component{
 
 
     handleChange = (event) => {
-        let has_right_value = event.target.value ==="Determined Y="||event.target.value ==="Extension"||event.target.value ==="Renewal"
+        let has_right_value = event.target.value.includes("=")
         
         this.setState({visible: has_right_value})
         this.setState({selected: event.target.value})

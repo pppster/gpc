@@ -54,16 +54,16 @@ const SCS = {
   "Very high": 0.11117
 }
 const R = {
-  "None R=": 0,
+  "None": 0,
   "No access required": 0,
-  "Immediately R=": 0,
+  "Immediately": 0,
   "Not determined": 0.11117,
   "Determined Y=": 1
 }
 const APP = {
   "None": 0,
-  "Extension": 1,
-  "Renewal": 1,
+  "Extension = ": 1,
+  "Renewal = ": 1,
 }
 const CA = {
   "None": 0,
@@ -123,18 +123,18 @@ class App extends React.Component{
       {/* <div>PCF: {this.state.PCF.toFixed(2)} --- TCF: {this.state.TCF.toFixed(2)} --- GP: {this.state.GP.toFixed(2)} --- TimeGP: {this.state.TimeGP.toFixed(2)}</div> */}
       <div className="grid-app" >
         <GracePeriodCalculation className="grace-period-calculation"
-            T0={100} legendT0="Default Grace Period T0"
-            RV={RV} legendRV="Vulnerability Risk Value RV"
-            Scope={SCOPE} legendScope="Scope S"
-            EM={EM} legendEM="Exploit Code Maturity EM"
-            RL={RL} legendRL="Remediation Level RL"
-            RC={RC} legendRC="Report Confidence RC"
-            ED={ED} legendED="Exploit Code Dissemination ED"
-            ISC={ISC} legendISC="Incident Scale ISC"
-            SCS={SCS} legendSCS= "Supply Chain Scale SCS"
-            R={R} legendR="Remedation Dissemination R"
-            APP={APP} legendAPP="Certification & Approval APP"
-            CA={CA} legendCA="Contractual Agreements (CIAs) CA"
+            T0={100} legendT0= "Default Grace Period T<sub>0</sub> "
+            RV={RV} legendRV="Vulnerability Risk Value RV "
+            Scope={SCOPE} legendScope="Scope S "
+            EM={EM} legendEM="Exploit Code Maturity EM "
+            RL={RL} legendRL="Remediation Level RL "
+            RC={RC} legendRC="Report Confidence RC "
+            ED={ED} legendED="Exploit Code Dissemination ED "
+            ISC={ISC} legendISC="Incident Scale ISC "
+            SCS={SCS} legendSCS= "Supply Chain Scale SCS "
+            R={R} legendR="Remedation Dissemination R "
+            APP={APP} legendAPP="Certification & Approval APP "
+            CA={CA} legendCA="Contractual Agreements (CIAs) CA "
             onTCFChange={this.handleTCFChange}
             onPCFChange={this.handlePCFChange}
             onGPChange={this.handleGPChange}

@@ -31,14 +31,23 @@ function get_text_instruction(){
 }
 function get_vizualization_results_not_pressed(){
     let tooltip_string =   <div>
-    The calculation results will be visualized here once you pressed the <b>Calculate</b> Button. 
+    <p>
+    The calculated Grace Period Factor GP is visualized to roughly estimate the reasonable time to remediate the given vulnerability.
+    Shown below are all calculation results for GP sorted in ascending order.<br></br>
+    Once you pressed press the <b>Calculate</b> Button, the calculated result will be shown in the plot.
+        
+    </p>
     </div>
     ;
     return tooltip_string; 
 }
 function get_vizualization_results_pressed(){
     let tooltip_string =   <div>
-    The calculated Grace Period is visualized to roughly estimate the urgency to fix the vulnerability.
+    <p>
+    The calculated Grace Period Factor GP is visualized to roughly estimate the reasonable time to remediate the given vulnerability.
+    Shown below are all calculation results for GP sorted in ascending order.<br></br>
+    The calculated Grace Period Factor is shown in the plot.
+    </p>
     </div>
     ;
     return tooltip_string; 

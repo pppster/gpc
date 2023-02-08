@@ -32,7 +32,7 @@ function get_tooltip_text(name){
         tooltip_string = get_tooltip_text_APP();
     }else if (name.includes("CA")){
         tooltip_string = get_tooltip_text_CA();
-    }else if (name.includes("T0")){
+    }else if (name.includes("Default Grace Period")){
         tooltip_string = get_tooltip_text_T0()
     }
     return tooltip_string;
@@ -41,8 +41,14 @@ function get_tooltip_text(name){
 function get_tooltip_text_GP(){
     let tooltip_string =   <div>
                             <b>Grace Period Factor</b>
-                            <p>The Grace Period Factor is calculated by the Metric. 
-                                It is a measured value for a reasonable remediation time of a given vulnerability.
+                            <p>
+                            GP quantifies the overall scaling of T<sub>0</sub>. 
+                            Given the minimum possible default grace period T<sub>0</sub>, GP scales the grace period to the actual appropriate length. Scaling is based on the calculated values for TCF and PCF.
+                            
+                            <br></br>
+                            <i>GP=(1+PCF)*(2-TCF)</i><br></br>
+
+                            For a scenario with maximum time criticality TCF and minimum process criticality PCF, GP would be 1. Thus, there would be no scaling of the given default grace period
                             </p>
                             </div>
                             ;
@@ -53,8 +59,12 @@ function get_tooltip_text_TCF(){
     let tooltip_string =   <div>
                             <b>Time Criticality Factor</b>
                             <p>
-
-                            The Time Criticality Factor depends on
+                            Evaluates the urgency or time pressure based on the criticality given by the vulnerability. The lower the time criticality, the longer the appropriate grace period/ remediation time.
+                            Given a process related reasonable time T1, TCF additionally scales the reasonable process duration related also to the given time criticality:<br></br>
+                            <i>T<sub>2</sub> = T<sub>1</sub>  *(1+(1-TCF))</i><br></br>
+                            <i> 0,5  ≤ TCF ≤ 1</i><br></br>
+                            <br></br>
+                            The Time Criticality Factor depends on:
                             <ul>
                             <li>Vulnerability Risk Value RV</li>
                             <li>Exploit Code Maturity EM</li>
@@ -68,11 +78,18 @@ function get_tooltip_text_TCF(){
                             ;
     return tooltip_string;
 }
+
 function get_tooltip_text_PCF(){
     let tooltip_string =   <div>
                             <b>Process Criticality Factor</b>
                             <p>
-                            The Process Criticality Factor depends on
+                            Evaluates the (vulnerability-independent) time required due to the technical prerequisites in the target system and the organizational circumstances of responsible actors. The greater the process criticality, the longer the appropriate grace period/ remediation time.
+                            Given a minimum possible standard grace period T<sub>0</sub>, PCF scales the reasonable process duration:<br></br>
+                            <i>T<sub>1</sub> = T<sub>0</sub>  *(1+PCF)</i><br></br>
+                            <i>0  ≤ PCF ≤ 0,3335</i>
+
+                            <br></br>
+                            The Process Criticality Factor depends on:
                             <ul>
                             <li>Supply Chain Scale SCS</li>
                             <li>Remediation Dissemination R</li>  
@@ -87,7 +104,11 @@ function get_tooltip_text_PCF(){
 function get_tooltip_text_TGP(){
     let tooltip_string =   <div>
                             <b>Grace Period</b>
-                            <p>This Calculation result is the suggested remediation time of a given vulnerability.</p>
+                            <p>
+                            Specifies the time required that is reasonable based on given process and time criticality of a disclosure process for a vulnerability present in field operation.<br></br>
+                            <i>T<sub>GP</sub>= T<sub>0</sub>  *(1+PCF)*(2-TCF)</i><br></br>
+                            <i>T<sub>0</sub>  ≤  T_GP  ≤  2*T<sub>0</sub>+APP+R</i>
+                            </p>
                             </div>
                             ;
     return tooltip_string;
@@ -252,6 +273,7 @@ function get_tooltip_text_SCS(){
                             ;
     return tooltip_string;
 }
+
 function get_tooltip_text_R(){
     let tooltip_string =   <div>
                             <b>Remediation Dissemination</b>
@@ -277,7 +299,6 @@ function get_tooltip_text_R(){
     return tooltip_string;
 }
 
-
 function get_tooltip_text_RV(){
     let tooltip_string =   <div>
                             <b>Vulnerability Risk Value</b>
@@ -298,6 +319,7 @@ function get_tooltip_text_RV(){
                             ;
     return tooltip_string;
 }
+
 function get_tooltip_text_APP(){
     let tooltip_string =   <div>
                             <b>Certification and Approval APP</b>
@@ -315,6 +337,7 @@ function get_tooltip_text_APP(){
                             ;
     return tooltip_string;
 }
+
 function get_tooltip_text_CA(){
     let tooltip_string =   <div>
                             <b>Contractual Agreements (CIAs) CA</b>
@@ -332,10 +355,14 @@ function get_tooltip_text_CA(){
                             ;
     return tooltip_string;
 }
+
 function get_tooltip_text_T0(){
     let tooltip_string =   <div>
                             <b>Default Grace Period</b>
-                            <p>The Default Grace Period is the Time Span in Days that will be multiplicated with the Grace Period Factor. </p>
+                            <p>
+                            Time which must be granted to the manufacturer by default (vulnerability-independent) at least to make a measure available for the vulnerable or affected component. 
+                            For a scenario with maximum time criticality TCF and minimum process criticality PCF, the appropriate grace period/remediation time is the default grace period T<sub>0</sub>.
+                            </p>
                             </div>
                             ;
     return tooltip_string;

@@ -16,5 +16,14 @@ p{
     
 }
 .ResultTable{
-    width: 40%
+    width: 100%;
+}
+
+.td-text{
+    width: 45%;
+}
+
+.td-value{
+    text-align: left;
+    width: auto;
 }

@@ -55,7 +55,7 @@ class GracePeriodVisualization extends React.Component {
             this.probs_scope_unchanged = calc_prob_value_list(this.gps, false);
             this.probs_scope_changed = calc_prob_value_list(this.gps, true);
             content = [
-                { id: "Time GP  ", value: '-',helptext:get_tooltip_text("TGP"),unit:""},
+                { id: "Reasonable Grace Period T<sub>GP<sub/>  ", value: '-',helptext:get_tooltip_text("TGP"),unit:""},
                 { id: "Grace Period Factor GP  ", value: '-',helptext:get_tooltip_text("GP"),unit:""},
                 { id: "Process Criticality Factor PCF  ", value: '-',helptext:get_tooltip_text("PCF"),unit:""},
                 { id: "Time Criticality Factor TCF  ", value: '-',helptext:get_tooltip_text("TCF"),unit:""},
@@ -91,7 +91,7 @@ class GracePeriodVisualization extends React.Component {
 
         }else {
             content = [
-                { id: "Time GP  ", value: (this.props.TimeGP),helptext:get_tooltip_text("TGP"),unit:" days"},
+                { id: "Reasonable Grace Period T<sub>GP</sub>  ", value: (this.props.TimeGP),helptext:get_tooltip_text("TGP"),unit:" days"},
                 { id: "Grace Period Factor GP  ", value: (this.props.GP).toFixed(2),helptext:get_tooltip_text("GP"),unit:""},
                 { id: "Process Criticality Factor PCF  ", value: (this.props.PCF).toFixed(2),helptext:get_tooltip_text("PCF"),unit:""},
                 { id: "Time Criticality Factor TCF  ", value: (this.props.TCF).toFixed(2),helptext:get_tooltip_text("TCF"),unit:""},
@@ -148,9 +148,8 @@ class GracePeriodVisualization extends React.Component {
                 <tbody>
                     {content.map(({id, value,helptext,unit}) => (
                     <tr key={id}>
-                        <td>{id}<div className="tooltip"><img src={helpicon} alt="help" className="helpicon"/><span className="tooltiptext">{helptext}</span></div></td>
-                        <td>{value}</td>
-                        <td>{unit}</td>
+                        <td className="td-text"><nobr dangerouslySetInnerHTML={{ __html: id}}></nobr><div className="tooltip"><img src={helpicon} alt="help" className="helpicon"/><span className="tooltiptext">{helptext}</span></div></td>
+                        <td className="td-value">{value} {unit}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -177,6 +176,7 @@ class GracePeriodVisualization extends React.Component {
                             orientation:"h"
                         },
                         xaxis: {
+                            title: "Possible calculation results for GP",
                             fixedrange: true,
                             range: [-0.01, 1.01],
                             tickmode:Array,
@@ -184,7 +184,7 @@ class GracePeriodVisualization extends React.Component {
                         },
                         
                         yaxis: {
-                            title: "Grace Period Value GP",
+                            title: "Grace Period Factor GP",
                             fixedrange: true,
                             range: [0.99,2.01]
                         },

@@ -25,6 +25,8 @@
   
   .tooltip:hover .tooltiptext {
     visibility: visible;
+    font-size: 1rem;
+    max-width: 20rem;
     transform: translateY(-50%);
     opacity: 1;
   }

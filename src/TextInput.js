@@ -34,7 +34,7 @@ class TextInput extends React.Component{
         return (
             <>
             <div className="grid-container">
-                <legend className="legend-dropdown">{this.props.legend}<div className="tooltip"><img src={helpicon} alt="help" className="helpicon"/><span className="tooltiptext">{texti}</span></div></legend>
+                <legend className="legend-dropdown"><nobr dangerouslySetInnerHTML={{ __html: this.props.legend }} ></nobr><div className="tooltip"><img src={helpicon} alt="help" className="helpicon"/><span className="tooltiptext">{texti}</span></div></legend>
                 <input type="number" className="textinput" onChange={this.handleChange} value={this.state.value}/>
                 <p className="days">days</p>
             </div>
