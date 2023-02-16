@@ -1,11 +1,11 @@
 import React from "react";
 import helpicon from "./help.png"
-import "./Dropdown.css"
+import "./ValueInput.css"
 import "./ToolTip.css"
 import {get_tooltip_text} from "./ToolTipText";
 
 
-class Dropdown extends React.Component{
+class ValueInput extends React.Component{
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this)
@@ -75,4 +75,4 @@ class Dropdown extends React.Component{
 
 
 
-export default Dropdown
+export default ValueInput

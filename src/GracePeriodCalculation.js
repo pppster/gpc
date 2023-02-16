@@ -1,5 +1,5 @@
 import React from "react";
-import Dropdown from "./Dropdown";
+import ValueInput from "./ValueInput";
 import TextInput from "./TextInput";
 import {calculate_PCF, calculate_TCF, calculate_grace_period, calculate_gp_time} from './functions'
 import {get_explanation_text} from "./ExplanationTexts"
@@ -145,55 +145,55 @@ class GracePeriodCalculation extends React.Component{
                     onInputChange={this.handleT0Change}
                     min={1}
                     max={10000}/>
-                <Dropdown
+                <ValueInput
                     entries={this.props.RV}
                     legend={this.props.legendRV}
                     onInputChange={this.handleRVChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.Scope}
                     legend={this.props.legendScope}
                     onInputChange={this.handleScopeChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.EM}
                     legend={this.props.legendEM}
                     onInputChange={this.handleEMChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.RL}
                     legend={this.props.legendRL}
                     onInputChange={this.handleRLChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.RC}
                     legend={this.props.legendRC}
                     onInputChange={this.handleRCChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.ED}
                     legend={this.props.legendED}
                     onInputChange={this.handleEDChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.ISC}
                     legend={this.props.legendISC}
                     onInputChange={this.handleISCChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.SCS}
                     legend={this.props.legendSCS}
                     onInputChange={this.handleSCSChange}
                     visible={false}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.R}
                     legend={this.props.legendR}
                     onInputChange={this.handleRChange}
@@ -203,7 +203,7 @@ class GracePeriodCalculation extends React.Component{
                     min={1}
                     max={10000}
                     />
-                <Dropdown
+                <ValueInput
                     entries={this.props.APP}
                     legend={this.props.legendAPP}
                     onInputChange={this.handleAPPChange}
@@ -214,7 +214,7 @@ class GracePeriodCalculation extends React.Component{
                     max={10000}
                     />
                 
-                <Dropdown
+                <ValueInput
                     entries={this.props.CA}
                     legend={this.props.legendCA}
                     onInputChange={this.handleCAChange}
