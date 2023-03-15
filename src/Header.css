@@ -1,36 +1,37 @@
-.grid-header{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: max-content;
+.grid-header {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: max-content;
 }
 
-.IEEM-icon{
-    height: 50px;
+.IEEM-icon {
+  height: 50px;
 }
 
-h2{
-    font-family: Arial, Helvetica, sans-serif;   
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

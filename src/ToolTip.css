@@ -1,35 +1,34 @@
-
 .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 600px;
-    max-height: 200;
-    background-color: rgb(191, 191, 191);
-    color: black;
-    text-align: left;
-    border: 1px solid black;
-    padding: 10px;
-    
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 0.5s;
-    overflow-y: auto;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    font-size: 1rem;
-    max-width: 20rem;
-    transform: translateY(-50%);
-    opacity: 1;
-  }
-.days{
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 600px;
+  max-height: 200;
+  background-color: rgb(191, 191, 191);
+  color: black;
+  text-align: left;
+  border: 1px solid black;
+  padding: 10px;
+
+
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+  overflow-y: auto;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  font-size: 1rem;
+  max-width: 20rem;
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+.days {
   vertical-align: middle;
 }

@@ -1,15 +1,31 @@
+/**
+ *
+ * @summary Component of the data input and GP calculation
+ * @author roja1017 <roja1017@h-ka.de>
+ *
+ * Created:       : 2022-10-23
+ * Last modified  : 2023-01-15
+ */
+
 import React from "react";
 import ValueInput from "./ValueInput";
 import TextInput from "./TextInput";
-import {calculate_PCF, calculate_TCF, calculate_grace_period, calculate_gp_time} from './functions'
-import {get_explanation_text} from "./ExplanationTexts"
+import { calculate_PCF, calculate_TCF, calculate_grace_period, calculate_gp_time } from './functions'
+import { get_explanation_text } from "./ExplanationTextProvider"
 
 import "./Button.css"
 import "./GracePeriodCalculation.css"
 
-class GracePeriodCalculation extends React.Component{
-    constructor(props){
+class GracePeriodCalculation extends React.Component {
+    /*
+    * The class initializes the input components for the calculation.
+    * Also it calculates the results and provides them via data binding to the parent component
+    */
+
+    constructor(props) {
         super(props);
+
+        // declare the binding methods to recieve values of the input elements
         this.handleRVChange = this.handleRVChange.bind(this)
         this.handleScopeChange = this.handleScopeChange.bind(this)
         this.handleEMChange = this.handleEMChange.bind(this)
@@ -25,7 +41,9 @@ class GracePeriodCalculation extends React.Component{
         this.handleRPeriodValue = this.handleRPeriodValue.bind(this)
         this.handleAPPRenewalValue = this.handleAPPRenewalValue.bind(this)
         this.handleButtonClick = this.handleButtonClick.bind(this)
-        this.state ={
+
+        // states need to be initialized. These are the default values
+        this.state = {
             RVValue: Object.values(props.RV)[0],
             Scope: Object.values(props.Scope)[0],
             EMValue: Object.values(props.EM)[0],
@@ -50,77 +68,82 @@ class GracePeriodCalculation extends React.Component{
     componentDidUpdate(prevProps) {
     }
 
+    /* define the handle functions for the data binding
+    * also handle an additional text input field of needed
+    */
 
     handleRVChange(value) {
-        this.setState({RVValue: value});
-        this.setState({change: true});
+        this.setState({ RVValue: value });
+        this.setState({ change: true });
     }
     handleScopeChange(value) {
-        this.setState({Scope: value});
-        this.setState({change: true});
+        this.setState({ Scope: value });
+        this.setState({ change: true });
     }
     handleEMChange(value) {
-        this.setState({EMValue: value});
-        this.setState({change: true});
+        this.setState({ EMValue: value });
+        this.setState({ change: true });
     }
     handleRLChange(value) {
-        this.setState({RLValue: value});
-        this.setState({change: true});
+        this.setState({ RLValue: value });
+        this.setState({ change: true });
     }
     handleRCChange(value) {
-        this.setState({RCValue: value});
-        this.setState({change: true});
+        this.setState({ RCValue: value });
+        this.setState({ change: true });
     }
     handleEDChange(value) {
-        this.setState({EDValue: value});
-        this.setState({change: true});
+        this.setState({ EDValue: value });
+        this.setState({ change: true });
     }
     handleISCChange(value) {
-        this.setState({ISCValue: value});
-        this.setState({change: true});
+        this.setState({ ISCValue: value });
+        this.setState({ change: true });
     }
     handleSCSChange(value) {
-        this.setState({SCSValue: value});
-        this.setState({change: true});
+        this.setState({ SCSValue: value });
+        this.setState({ change: true });
     }
     handleRChange(value) {
-        this.setState({RValue: value});
-        this.setState({change: true});
+        this.setState({ RValue: value });
+        this.setState({ change: true });
     }
     handleAPPChange(value) {
-        this.setState({APPValue: value});
-        this.setState({change: true});
+        this.setState({ APPValue: value });
+        this.setState({ change: true });
     }
     handleCAChange(value) {
-        this.setState({CAValue: value});
-        this.setState({change: true});
+        this.setState({ CAValue: value });
+        this.setState({ change: true });
     }
     handleT0Change(value) {
-        this.setState({T_0Value: value});
-        this.setState({change: true});
+        this.setState({ T_0Value: value });
+        this.setState({ change: true });
     }
     handleRPeriodValue(value) {
-        this.setState({R_period_value: value});
-        this.setState({change: true});
+        this.setState({ R_period_value: value });
+        this.setState({ change: true });
     }
     handleAPPRenewalValue(value) {
-        this.setState({App_renewal_value: value});
-        this.setState({change: true});
+        this.setState({ App_renewal_value: value });
+        this.setState({ change: true });
     }
 
-    handleButtonClick(){
+    handleButtonClick() {
+        // triggers the calculation if the button is pressed
+
         let loc_tcf = calculate_TCF(this.state.RVValue, this.state.EMValue, this.state.RLValue, this.state.RCValue, this.state.EDValue, this.state.ISCValue);
         let loc_pcf = calculate_PCF(this.state.RValue, this.state.SCSValue, this.state.CAValue);
         let loc_gp = calculate_grace_period(this.state.Scope, loc_tcf, loc_pcf);
 
-        
-        let loc_tgp = calculate_gp_time(this.state.RValue, this.state.T_0Value, loc_gp, this.state.APPValue,this.state.App_renewal_value, this.state.R_period_value);
+
+        let loc_tgp = calculate_gp_time(this.state.RValue, this.state.T_0Value, loc_gp, this.state.APPValue, this.state.App_renewal_value, this.state.R_period_value);
         let loc_scope = this.state.Scope;
-        this.setState({TCFValue: loc_tcf});
-        this.setState({PCFValue: loc_pcf});
-        this.setState({GPValue: loc_gp});
-        this.setState({T_GPValue: loc_tgp});
-        this.setState({change: false})
+        this.setState({ TCFValue: loc_tcf });
+        this.setState({ PCFValue: loc_pcf });
+        this.setState({ GPValue: loc_gp });
+        this.setState({ T_GPValue: loc_tgp });
+        this.setState({ change: false })
         this.props.onTCFChange(loc_tcf);
         this.props.onPCFChange(loc_pcf);
         this.props.onGPChange(loc_gp);
@@ -129,107 +152,109 @@ class GracePeriodCalculation extends React.Component{
 
     }
 
-      render(){
+    render() {
+        /* initialize the instance of the TextInput, ValueInputs and the the button
+        */
 
         return (
             <>
-            <fieldset className="dataInput">
-            
-            
-            <div className="Explanation">{get_explanation_text("Instruction")}</div>
-                <br/>
-                <legend className="GPC-legend">Data Input</legend>
-                <TextInput
-                    legend={this.props.legendT0}
-                    defaultValue={this.props.T0}
-                    onInputChange={this.handleT0Change}
-                    min={1}
-                    max={10000}/>
-                <ValueInput
-                    entries={this.props.RV}
-                    legend={this.props.legendRV}
-                    onInputChange={this.handleRVChange}
-                    visible={false}
+                <fieldset className="dataInput">
+
+
+                    <div className="Explanation">{get_explanation_text("Instruction")}</div>
+                    <br />
+                    <legend className="GPC-legend">Data Input</legend>
+                    <TextInput
+                        legend={this.props.legendT0}
+                        defaultValue={this.props.T0}
+                        onInputChange={this.handleT0Change}
+                        min={1}
+                        max={10000} />
+                    <ValueInput
+                        entries={this.props.RV}
+                        legend={this.props.legendRV}
+                        onInputChange={this.handleRVChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.Scope}
-                    legend={this.props.legendScope}
-                    onInputChange={this.handleScopeChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.Scope}
+                        legend={this.props.legendScope}
+                        onInputChange={this.handleScopeChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.EM}
-                    legend={this.props.legendEM}
-                    onInputChange={this.handleEMChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.EM}
+                        legend={this.props.legendEM}
+                        onInputChange={this.handleEMChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.RL}
-                    legend={this.props.legendRL}
-                    onInputChange={this.handleRLChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.RL}
+                        legend={this.props.legendRL}
+                        onInputChange={this.handleRLChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.RC}
-                    legend={this.props.legendRC}
-                    onInputChange={this.handleRCChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.RC}
+                        legend={this.props.legendRC}
+                        onInputChange={this.handleRCChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.ED}
-                    legend={this.props.legendED}
-                    onInputChange={this.handleEDChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.ED}
+                        legend={this.props.legendED}
+                        onInputChange={this.handleEDChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.ISC}
-                    legend={this.props.legendISC}
-                    onInputChange={this.handleISCChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.ISC}
+                        legend={this.props.legendISC}
+                        onInputChange={this.handleISCChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.SCS}
-                    legend={this.props.legendSCS}
-                    onInputChange={this.handleSCSChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.SCS}
+                        legend={this.props.legendSCS}
+                        onInputChange={this.handleSCSChange}
+                        visible={false}
                     />
-                <ValueInput
-                    entries={this.props.R}
-                    legend={this.props.legendR}
-                    onInputChange={this.handleRChange}
-                    onTextInputChange={this.handleRPeriodValue}
-                    defaultTextfieldValue={this.state.R_period_value}
-                    visible={false}
-                    min={1}
-                    max={10000}
+                    <ValueInput
+                        entries={this.props.R}
+                        legend={this.props.legendR}
+                        onInputChange={this.handleRChange}
+                        onTextInputChange={this.handleRPeriodValue}
+                        defaultTextfieldValue={this.state.R_period_value}
+                        visible={false}
+                        min={1}
+                        max={10000}
                     />
-                <ValueInput
-                    entries={this.props.APP}
-                    legend={this.props.legendAPP}
-                    onInputChange={this.handleAPPChange}
-                    onTextInputChange={this.handleAPPRenewalValue}
-                    defaultTextfieldValue={this.state.App_renewal_value}
-                    visible={false}
-                    min={1}
-                    max={10000}
-                    />
-                
-                <ValueInput
-                    entries={this.props.CA}
-                    legend={this.props.legendCA}
-                    onInputChange={this.handleCAChange}
-                    visible={false}
+                    <ValueInput
+                        entries={this.props.APP}
+                        legend={this.props.legendAPP}
+                        onInputChange={this.handleAPPChange}
+                        onTextInputChange={this.handleAPPRenewalValue}
+                        defaultTextfieldValue={this.state.App_renewal_value}
+                        visible={false}
+                        min={1}
+                        max={10000}
                     />
 
-            <p>
-                <button type="button" onClick={this.handleButtonClick}>Calculate</button>
-                {this.state.change && <text className="ChangeText">You have made some changes. Please press the calculate button again.</text>}
-            </p>
-            </fieldset>
+                    <ValueInput
+                        entries={this.props.CA}
+                        legend={this.props.legendCA}
+                        onInputChange={this.handleCAChange}
+                        visible={false}
+                    />
+
+                    <p>
+                        <button type="button" onClick={this.handleButtonClick}>Calculate</button>
+                        {this.state.change && <text className="ChangeText">You have made some changes. Please press the calculate button again.</text>}
+                    </p>
+                </fieldset>
             </>
 
         )
-      }
+    }
 }
 
 export default GracePeriodCalculation
