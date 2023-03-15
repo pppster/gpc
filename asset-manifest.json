@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gpc/static/css/main.332abc92.css",
-    "main.js": "/gpc/static/js/main.95356ad7.js",
+    "main.js": "/gpc/static/js/main.8c612833.js",
     "static/media/IEEM.jpg": "/gpc/static/media/IEEM.be751bf623aa8550e61c.jpg",
     "index.html": "/gpc/index.html",
     "main.332abc92.css.map": "/gpc/static/css/main.332abc92.css.map",
-    "main.95356ad7.js.map": "/gpc/static/js/main.95356ad7.js.map"
+    "main.8c612833.js.map": "/gpc/static/js/main.8c612833.js.map"
   },
   "entrypoints": [
     "static/css/main.332abc92.css",
-    "static/js/main.95356ad7.js"
+    "static/js/main.8c612833.js"
   ]
 }
