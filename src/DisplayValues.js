@@ -41,7 +41,7 @@ class DisplayValues extends React.Component {
 
         return (
             <>
-                <p>{this.state.explain_text}</p>
+                <div>{this.state.explain_text}</div>
                 <table className="ResultTable">
                     <tbody>
                         {this.state.content.map(({ id, value, helptext, unit }) => (

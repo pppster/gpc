@@ -87,7 +87,7 @@ class ValueInput extends React.Component {
                     </select>
                     {this.state.visible && <input type="number" min={0} value={this.state.value_textfield} className="textinputdropdown" onChange={this.handleTextInputChange} />}
 
-                    {this.state.visible && <p className="days">days</p>}
+                    {this.state.visible && <div className="days">days</div>}
                 </div>
             </>
         )

@@ -175,7 +175,7 @@ class GracePeriodVisualization extends React.Component {
                     explain_text={explain_text}
                     content={content}
                 />
-                <p>{visual_text}</p>
+                <div>{visual_text}</div>
                 <Plot
                     className="plot"
                     data={plot_data}
